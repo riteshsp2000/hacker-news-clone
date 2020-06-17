@@ -1,7 +1,24 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import Router from 'next/router';
 
-const Layout = ({ children, title, description }) => {
+const Layout = ({ children, title, description, backButton }) => {
+  const renderBackButton = () => {
+    if (backButton) {
+      return (
+        <span
+          className='back-button'
+          onClick={() => Router.back()}
+          styles={{ margin: '5em', cursor: 'pointer' }}
+        >
+          ⬅
+        </span>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div>
       <Head>
@@ -11,6 +28,7 @@ const Layout = ({ children, title, description }) => {
 
       <div className='container'>
         <nav>
+          {renderBackButton()}
           <Link href='/'>
             <a>
               <span className='main-title'>Hacker Next</span>
@@ -56,6 +74,12 @@ const Layout = ({ children, title, description }) => {
           body {
             background: white;
             font-family: Verdant, Geneva, sans-serif;
+          }
+
+          .back-button {
+            font-size: 0.9rem;
+            padding-right: 1em;
+            cursor: pointer;
           }
         `}
       </style>
