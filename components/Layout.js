@@ -44,7 +44,9 @@ const Layout = ({ children, title, description }) => {
           }
 
           nav .main-title {
-            font-weight: bold;
+            font-weight: bolder;
+            font-size: 1.2rem;
+            color: black;
           }
         `}
       </style>
