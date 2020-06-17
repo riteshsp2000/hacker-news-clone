@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 import Error from 'next/error';
 
 import Layout from '../components/Layout';
+import CommentList from '../components/CommentList';
 
 class Story extends React.Component {
   static async getInitialProps({ req, res, query }) {
@@ -20,6 +21,15 @@ class Story extends React.Component {
 
     return { story };
   }
+
+  renderComments = (story) => {
+    if (story.comments.length > 0) {
+      return <CommentList comments={story.comments} />;
+    } else {
+      return <div>No comments to show.</div>;
+    }
+  };
+
   render() {
     const { story } = this.props;
 
@@ -38,6 +48,8 @@ class Story extends React.Component {
             <strong>{story.comments.count}</strong>
             <strong>{story.time_ago}</strong>
           </div>
+
+          {this.renderComments(story)}
         </main>
 
         <style jsx>
