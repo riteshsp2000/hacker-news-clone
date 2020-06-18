@@ -24,6 +24,19 @@ class Index extends React.Component {
     return { page, stories };
   }
 
+  componentDidMount() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then((registeration) => {
+          console.log('service worker registration successful', registeration);
+        })
+        .catch((error) => {
+          console.warn('service worker registration failed', error.message);
+        });
+    }
+  }
+
   renderPagination = (page) => {
     if (page === 1) {
       return (
